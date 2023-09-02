@@ -50,7 +50,7 @@ public class UserController {
 
     @GetMapping("/info")
     public Result<Map<String, Object>> getUserInfo(@RequestParam("token") String token){
-        // 根据Token获取用户信息 从redis
+        // 根据Jwt验证用户信息
         Map<String, Object> data = userService.getUserInfo(token);
         if (data != null) {
             return Result.success(data);
