@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.common.vo.Result;
 import com.example.sys.entity.User;
 import com.example.sys.service.IUserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,6 +25,7 @@ import java.util.Map;
  * @author kai
  * @since 2023-08-24
  */
+@Api(tags = {"User Interface List"})
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -32,12 +35,14 @@ public class UserController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @ApiOperation("User List")
     @GetMapping("/all")
     public Result<List<User>> getAllUser(){
         List<User> list = userService.list();
         return Result.success(list);
     }
 
+    @ApiOperation("User Login")
     @PostMapping ("/login")
     public Result<Map<String, Object>> login(@RequestBody User user){
 //        List<User> list = userService.list();
